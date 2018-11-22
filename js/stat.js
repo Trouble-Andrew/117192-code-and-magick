@@ -52,7 +52,7 @@ window.renderStatistics = function (ctx, players, times) {
 
     ctx.fillRect(CLOUD_X + LEFT_PADDING + (BAR_WIDTH + BAR_MARGIN_RIGHT) * i, BAR_START_POSITION, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + LEFT_PADDING + (BAR_WIDTH + BAR_MARGIN_RIGHT) * i, (BAR_HEIGHT * times[i]) / maxTime + 230);
+    ctx.fillText(Math.round(times[i]), CLOUD_X + LEFT_PADDING + (BAR_WIDTH + BAR_MARGIN_RIGHT) * i, (BAR_HEIGHT * times[i]) / maxTime + BAR_START_POSITION - GAP);
   }
 
   ctx.fillStyle = '#000';
