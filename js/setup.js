@@ -1,5 +1,7 @@
 'use strict';
 
+var WIZARDS_QUANTITY = 4;
+
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
@@ -27,21 +29,21 @@ function shuffle(array) {
 
 var randomizeWizard = function (wizardsArr) {
   var newWizardsData = [];
-  for (var i = 0; i < 4; i++) {
+  shuffle(wizardsArr.name);
+  shuffle(wizardsArr.family);
+  shuffle(wizardsArr.coatColor);
+  shuffle(wizardsArr.eyesColor);
+  for (var i = 0; i < WIZARDS_QUANTITY; i++) {
     newWizardsData[i] = {};
-    shuffle(wizardsArr.name);
     newWizardsData[i].name = wizardsArr.name[i];
-    shuffle(wizardsArr.family);
     newWizardsData[i].family = wizardsArr.family[i];
-    shuffle(wizardsArr.coatColor);
     newWizardsData[i].coatColor = wizardsArr.coatColor[i];
-    shuffle(wizardsArr.eyesColor);
     newWizardsData[i].eyesColor = wizardsArr.eyesColor[i];
   }
   return newWizardsData;
 };
 
-var newWiz = randomizeWizard(wizardsData);
+var wizards = randomizeWizard(wizardsData);
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -55,9 +57,10 @@ var renderWizard = function (wizard) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < 4; i++) {
-  fragment.appendChild(renderWizard(newWiz[i]));
-}
+
+wizards.forEach(function (i) {
+  fragment.appendChild(renderWizard(i));
+});
 
 similarListElement.appendChild(fragment);
 
