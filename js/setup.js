@@ -3,6 +3,8 @@
 var WIZARDS_QUANTITY = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
+var DEFAULT_Y = '80px';
+var DEFAULT_X = '50%';
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -83,6 +85,8 @@ var openPopup = function () {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setup.style.top = DEFAULT_Y;
+  setup.style.left = DEFAULT_X;
 };
 
 setupOpen.addEventListener('click', function () {
