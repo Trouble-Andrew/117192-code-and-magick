@@ -1019,3 +1019,7 @@ input[type=radio]:checked + .review-mark-label
 
     opacity: 0;
 }
+
+.drag-enter {
+	border: 2px dashed #000;
+}
