@@ -27,8 +27,8 @@
         y: moveEvt.clientY
       };
 
-      window.setup.style.top = (window.setup.offsetTop - shift.y) + 'px';
-      window.setup.style.left = (window.setup.offsetLeft - shift.x) + 'px';
+      window.setup.setup.style.top = (window.setup.setup.offsetTop - shift.y) + 'px';
+      window.setup.setup.style.left = (window.setup.setup.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {
@@ -50,14 +50,10 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var artifactsShop = window.setup.querySelector('.setup-artifacts-shop');
+  var artifactsShop = window.setup.setup.querySelector('.setup-artifacts-shop');
   var artifactCell = artifactsShop.querySelector('.setup-artifacts-cell');
   var artifact = artifactCell.children[0];
-  // var draggable = document.querySelectorAll('[draggable]')
   var dragged;
-
-  // window.setup.addEventListener('drag', function (evt) {
-  // }, false);
 
   artifact.addEventListener('dragstart', function (evt) {
     dragged = evt.target;
@@ -68,23 +64,23 @@
     evt.target.style.opacity = '';
   }, false);
 
-  window.setup.addEventListener('dragover', function (evt) {
+  window.setup.setup.addEventListener('dragover', function (evt) {
     evt.preventDefault();
   }, false);
 
-  window.setup.addEventListener('dragenter', function (evt) {
+  window.setup.setup.addEventListener('dragenter', function (evt) {
     if (evt.target.className === 'setup-artifacts-cell') {
       evt.target.style.background = 'rgba(0, 0, 0, 0.2)';
     }
   }, false);
 
-  window.setup.addEventListener('dragleave', function (evt) {
+  window.setup.setup.addEventListener('dragleave', function (evt) {
     if (evt.target.className === 'setup-artifacts-cell') {
       evt.target.style.background = '';
     }
   }, false);
 
-  window.setup.addEventListener('drop', function (evt) {
+  window.setup.setup.addEventListener('drop', function (evt) {
     evt.preventDefault();
     if (evt.target.className === 'setup-artifacts-cell') {
       evt.target.style.background = '';
