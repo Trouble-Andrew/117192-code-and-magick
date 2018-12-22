@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var userNameInput = window.setup.setup.querySelector('.setup-user-name');
+  var setup = document.querySelector('.setup');
+  var userNameInput = setup.querySelector('.setup-user-name');
 
   userNameInput.addEventListener('invalid', function () {
     if (userNameInput.validity.tooShort) {
@@ -14,7 +15,6 @@
       userNameInput.setCustomValidity('');
     }
   });
-
 
   userNameInput.addEventListener('input', function (evt) {
     var target = evt.target;
