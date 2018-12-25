@@ -5,8 +5,11 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
 
+  setup.classList.remove('hidden');
+
   var DEFAULT_Y = '80px';
   var DEFAULT_X = '50%';
+  var WIZARD_QUANTITY = 4;
 
   setupOpen.addEventListener('click', function () {
     window.popup.open(setup);
@@ -62,4 +65,42 @@
   wizardCoat.addEventListener('click', сoatClickHandler);
   wizardEyes.addEventListener('click', eyesClickHandler);
   wizardFireball.addEventListener('click', fireballsClickHandler);
+
+
+  var userDialog = document.querySelector('.setup');
+
+  var form = document.querySelector('.setup-wizard-form');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), function (response) {
+      userDialog.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
+
+  var successHandler = function (wizards) {
+    var fragment = document.createDocumentFragment();
+    window.util.shuffle(wizards);
+    for (var i = 0; i < WIZARD_QUANTITY; i++) {
+      fragment.appendChild(window.generateWizard.render(wizards[i]));
+    }
+    window.generateWizard.similar.appendChild(fragment);
+
+    userDialog.querySelector('.setup-similar').classList.remove('hidden');
+  };
+
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  window.backend.load(successHandler, errorHandler);
 })();
