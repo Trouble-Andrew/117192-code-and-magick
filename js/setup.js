@@ -82,9 +82,15 @@
   var successHandler = function (wizards) {
     var fragment = document.createDocumentFragment();
     window.util.shuffle(wizards);
-    for (var i = 0; i < WIZARD_QUANTITY; i++) {
-      fragment.appendChild(window.generateWizard.render(wizards[i]));
-    }
+
+    wizards.slice(0, WIZARD_QUANTITY).forEach(function (wizard) {
+      fragment.appendChild(window.generateWizard.render(wizard));
+    });
+
+    // for (var i = 0; i < wizards.slice(0, WIZARD_QUANTITY).length; i++) {
+    //   fragment.appendChild(window.generateWizard.render(wizards[i]));
+    // }
+
     window.generateWizard.similar.appendChild(fragment);
 
     userDialog.querySelector('.setup-similar').classList.remove('hidden');

@@ -41,16 +41,11 @@
       wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     }
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    // wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
     return wizardElement;
   };
 
   var fragment = document.createDocumentFragment();
-
-  // wizards.forEach(function (wizard) {
-  //   fragment.appendChild(renderWizard(wizard));
-  // });
 
   similarListElement.appendChild(fragment);
 
