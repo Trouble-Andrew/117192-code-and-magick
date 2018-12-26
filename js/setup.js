@@ -5,7 +5,7 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
 
-  setup.classList.remove('hidden');
+  // setup.classList.remove('hidden');
 
   var DEFAULT_Y = '80px';
   var DEFAULT_X = '50%';
@@ -73,7 +73,7 @@
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), function (response) {
+    window.backend.save(new FormData(form), function () {
       userDialog.classList.add('hidden');
     });
     evt.preventDefault();
