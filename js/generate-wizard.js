@@ -35,21 +35,26 @@
 
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name + ' ' + wizard.family;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    if (wizard.family) {
+      wizardElement.querySelector('.setup-similar-label').textContent = wizard.name + ' ' + wizard.family;
+    } else {
+      wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    }
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
 
     return wizardElement;
   };
 
   var fragment = document.createDocumentFragment();
 
-  wizards.forEach(function (wizard) {
-    fragment.appendChild(renderWizard(wizard));
-  });
-
   similarListElement.appendChild(fragment);
 
   var similarSetup = document.querySelector('.setup-similar');
   similarSetup.classList.remove('hidden');
+
+  window.generateWizard = {
+    render: renderWizard,
+    similar: similarListElement,
+    wizards: wizards
+  };
 })();
