@@ -15,7 +15,7 @@
   };
 
   var onPopupEscPress = function (evt) {
-    window.util.isEscEvent(evt, close);
+    window.util.pressEsc(evt, close);
   };
 
   window.popup = {
