@@ -3,6 +3,8 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var DEBOUNCE_INTERVAL = 500;
+  var lastTimeout;
 
   var isEscEvent = function (evt, action) {
     if (evt.keyCode === ESC_KEYCODE) {
@@ -27,10 +29,18 @@
     var randomElementIndex = Math.floor(Math.random() * array.length);
     return array[randomElementIndex];
   };
+  var debounce = function (cb) {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(cb, DEBOUNCE_INTERVAL);
+  };
+
   window.util = {
     pressEsc: isEscEvent,
     pressEnter: isEnterEvent,
     shuffle: shuffle,
-    random: getRandomElement
+    random: getRandomElement,
+    timeout: debounce
   };
 })();

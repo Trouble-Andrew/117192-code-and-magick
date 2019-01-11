@@ -5,6 +5,8 @@
   var eyesColor;
   var wizards = [];
 
+  var wizardElement = document.querySelector('.setup-wizard');
+
   var getRank = function (wizard) {
     var rank = 0;
 
@@ -18,34 +20,30 @@
     return rank;
   };
 
-  var namesComparator = function (left, right) {
-    if (left > right) {
-      return 1;
-    } else if (left < right) {
-      return -1;
-    } else {
-      return 0;
-    }
-  };
-
   var updateWizards = function () {
-    window.renderWizard.render(wizards.sort(function (left, right) {
+    window.renderWizard.render(wizards.slice().sort(function (left, right) {
       var rankDiff = getRank(right) - getRank(left);
       if (rankDiff === 0) {
-        rankDiff = namesComparator(left.name, right.name);
+        rankDiff = wizards.indexOf(left) - wizards.indexOf(right);
       }
       return rankDiff;
     }));
   };
 
-  window.generateWizard.wizard.eyeClickHandler = window.debounce.timeout(function (color) {
-    eyesColor = color;
-    updateWizards();
+  var wizardCoatElement = wizardElement.querySelector('.wizard-coat');
+  wizardCoatElement.addEventListener('click', function () {
+    var newColor = window.util.random(window.generateWizard.wizard.coatColor);
+    wizardCoatElement.style.fill = newColor;
+    coatColor = newColor;
+    window.util.timeout(updateWizards);
   });
 
-  window.generateWizard.wizard.coatClickHandler = window.debounce.timeout(function (color) {
-    coatColor = color;
-    updateWizards();
+  var wizardEyesElement = wizardElement.querySelector('.wizard-eyes');
+  wizardEyesElement.addEventListener('click', function () {
+    var newColor = window.util.random(window.generateWizard.wizard.eyesColor);
+    wizardEyesElement.style.fill = newColor;
+    eyesColor = newColor;
+    window.util.timeout(updateWizards);
   });
 
   var successHandler = function (data) {
